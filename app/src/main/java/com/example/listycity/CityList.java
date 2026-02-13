@@ -9,10 +9,13 @@ import java.util.List;
  */
 public class CityList {
     private List<City> cities = new ArrayList<>();
+
     /**
-     * This adds a city to the list if the city does not exist
+     * Adds a city to the list if it does not already exist
      * @param city
-     *      This is a candidate city to add
+     *      The candidate city to add
+     * @throws IllegalArgumentException
+     *      If the city already exists in the list
      */
     public void add(City city) {
         if (cities.contains(city)) {
@@ -20,15 +23,49 @@ public class CityList {
         }
         cities.add(city);
     }
+
     /**
-     * This returns a sorted list of cities
+     * Returns a sorted list of all cities
      * @return
-     *      Return the sorted list
+     *      A sorted List of City objects
      */
     public List<City> getCities() {
         List<City> list = cities;
         Collections.sort(list);
         return list;
     }
-}
 
+    /**
+     * Checks whether a given city exists in the list
+     * @param city
+     *      The city to search for
+     * @return
+     *      true if the city is in the list, false otherwise
+     */
+    public boolean hasCity(City city) {
+        return cities.contains(city);
+    }
+
+    /**
+     * Removes a city from the list if it exists
+     * @param city
+     *      The city to remove
+     * @throws IllegalArgumentException
+     *      If the city is not found in the list
+     */
+    public void delete(City city) {
+        if (!cities.contains(city)) {
+            throw new IllegalArgumentException("City not found in list.");
+        }
+        cities.remove(city);
+    }
+
+    /**
+     * Returns the number of cities in the list
+     * @return
+     *      The count of cities as an int
+     */
+    public int countCities() {
+        return cities.size();
+    }
+}
